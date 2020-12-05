@@ -132,7 +132,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
 - (void)setupMainView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumLineSpacing = 0;
+    flowLayout.minimumLineSpacing = self.cellSpace;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _flowLayout = flowLayout;
     
@@ -457,7 +457,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     
     int index = 0;
     if (_flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        index = (_mainView.contentOffset.x + _flowLayout.itemSize.width * 0.5) / _flowLayout.itemSize.width;
+        index = (_mainView.contentOffset.x + _flowLayout.itemSize.width * 0.5+self.cellSpace/2) / (_flowLayout.itemSize.width+self.cellSpace/2);
     } else {
         index = (_mainView.contentOffset.y + _flowLayout.itemSize.height * 0.5) / _flowLayout.itemSize.height;
     }
@@ -664,6 +664,11 @@ NSString * const ID = @"SDCycleScrollViewCell";
     if (self.autoScroll) {
         [self setupTimer];
     }
+}
+
+- (void)setCellSpace:(float)cellSpace{
+    _cellSpace = cellSpace;
+    _flowLayout.minimumLineSpacing = cellSpace;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
