@@ -80,6 +80,10 @@ typedef enum {
 
 @interface SDCycleScrollView : UIView
 
+/**
+ 轮播图相互间距 默认为0
+ */
+@property (assign,nonatomic) float cellSpace;
 
 /** 初始轮播图（推荐使用） */
 + (instancetype)cycleScrollViewWithFrame:(CGRect)frame delegate:(id<SDCycleScrollViewDelegate>)delegate placeholderImage:(UIImage *)placeholderImage;
